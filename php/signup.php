@@ -47,12 +47,12 @@ if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
 
                         $status = "Active now"; //once the user signed up then his status will be active now
                         $random_id = rand(time(), 1000000); //this line is to create a random id for user
-
+                        $encrypt_pass = md5($password);
                         //now lets insder all user data inside table
                         $sql2 = mysqli_query(
                             $conn,
                             "INSERT INTO users (unique_id, fname, lname, email, password, img, status)
-                                      VALUES ({$random_id}, '{$fname}', '{$lname}', '{$email}', '{$password}', '{$new_img_name}', '{ $status}')"
+                                      VALUES ({$random_id}, '{$fname}', '{$lname}', '{$email}', '{$encrypt_pass}', '{$new_img_name}', '{$status}')"
                         );
                         if ($sql2) {
                             //if these data inserted
@@ -63,7 +63,7 @@ if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
                             if (mysqli_num_rows($sql3) > 0) {
                                 $row = mysqli_fetch_assoc($sql3);
                                 $_SESSION["unique_id"] = $row["unique_id"]; //using this session to use the user unique_id in other php files as well.
-                                echo "success";
+                                echo " success";
                             }
                         } else {
                             echo "Something went wrong!";
