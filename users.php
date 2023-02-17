@@ -17,10 +17,10 @@
             }
         ?>
         <div class="content">
-            <img src="img.jpg" alt="">
+            <img src="php/images/<?php echo $row['img']; ?>" alt="">
             <div class="details">
-                <span>EECS 4481</span>
-                <p>Active now</p>
+                <span><?php echo $row['fname']. " " . $row['lname'] ?></span>
+                <p><?php echo $row['status']; ?></p>
             </div>
         </div>
         <a href="#" class="logout">Logout</a>
@@ -31,68 +31,10 @@
           <button><i class="fas fa-search"></i></button>
       </div>
       <div class="users-list">
-          <a href="#">
-              <div class="content">
-                  <img src="img.jpg" alt="">
-                  <div class="details">
-                      <span>EECS 4481</span>
-                      <p>This is test message</p>
-                  </div>
-              </div>
-              <div class="status-dot"><i class="fas fa-circle"></i></div>
-          </a>
-          <a href="#">
-            <div class="content">
-                <img src="img.jpg" alt="">
-                <div class="details">
-                    <span>EECS 4481</span>
-                    <p>This is test message</p>
-                </div>
-            </div>
-            <div class="status-dot"><i class="fas fa-circle"></i></div>
-        </a>
-        <a href="#">
-            <div class="content">
-                <img src="img.jpg" alt="">
-                <div class="details">
-                    <span>EECS 4481</span>
-                    <p>This is test message</p>
-                </div>
-            </div>
-            <div class="status-dot"><i class="fas fa-circle"></i></div>
-        </a>
-        <a href="#">
-            <div class="content">
-                <img src="img.jpg" alt="">
-                <div class="details">
-                    <span>EECS 4481</span>
-                    <p>This is test message</p>
-                </div>
-            </div>
-            <div class="status-dot"><i class="fas fa-circle"></i></div>
-        </a>
-        <a href="#">
-            <div class="content">
-                <img src="img.jpg" alt="">
-                <div class="details">
-                    <span>EECS 4481</span>
-                    <p>This is test message</p>
-                </div>
-            </div>
-            <div class="status-dot"><i class="fas fa-circle"></i></div>
-        </a>
-        <a href="#">
-            <div class="content">
-                <img src="img.jpg" alt="">
-                <div class="details">
-                    <span>EECS 4481</span>
-                    <p>This is test message</p>
-                </div>
-            </div>
-            <div class="status-dot"><i class="fas fa-circle"></i></div>
-        </a>
+
+
       </div>
-        </section>
+    </section>
     </div>
     <script src="javascript/users.js">
     </script>
