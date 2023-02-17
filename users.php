@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>EECS 4481-project</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-</head>
+<?php 
+    session_start();
+    if(!isset($_SESSION['unique_id'])){
+      header("location: login.php");
+    }
+?>
+<?php include_once "header.php"; ?>
 <body>
     <div class="wrapper">
         <section class="users">
-      <header>
+        <header>
+        <?php 
+            include_once "php/config.php";
+            $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+            if(mysqli_num_rows($sql) > 0){
+              $row = mysqli_fetch_assoc($sql);
+            }
+        ?>
         <div class="content">
             <img src="img.jpg" alt="">
             <div class="details">
