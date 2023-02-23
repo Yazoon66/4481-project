@@ -1,10 +1,10 @@
 <?php
-  $hostname = "localhost";
+  $host = "localhost";
   $username = "root";
   $password = "";
-  $dbname = "chat";
+  $database = "chat";
 
-  $conn = mysqli_connect($hostname, $username, $password, $dbname);
+  $conn = mysqli_connect($host, $username, $password, $database);
   if(!$conn){
     echo "Database connection error".mysqli_connect_error();
   }

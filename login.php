@@ -1,7 +1,11 @@
 <?php 
+  // Start a new session or resume an existing session
   session_start();
+  
+  // If the user is already logged in, redirect them to the users.php page
   if(isset($_SESSION['unique_id'])){
     header("location: users.php");
+    exit();
   }
 ?>
 

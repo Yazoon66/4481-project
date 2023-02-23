@@ -1,6 +1,10 @@
 <?php 
+  // Start a new session or resume an existing session
   session_start();
+  
+  // If the user is already logged in, redirect them to the users.php page
   if(isset($_SESSION['unique_id'])){
+    // Redirect the user to the 'users.php' page
     header("location: users.php");
   }
 ?>
@@ -43,6 +47,7 @@
     </section>
   </div>
 
+  <!-- Load the 'pass-show-hide.js' and 'signup.js' scripts -->
   <script src="javascript/pass-show-hide.js"></script>
   <script src="javascript/signup.js"></script>
 

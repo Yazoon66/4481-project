@@ -1,63 +1,75 @@
-const form = document.querySelector(".typing-area"),
-incoming_id = form.querySelector(".incoming_id").value,
-inputField = form.querySelector(".input-field"),
-sendBtn = form.querySelector("button"),
-chatBox = document.querySelector(".chat-box");
+// Get the DOM elements by class or tag name
+const form = document.querySelector(".typing-area");
+const incoming_id = form.querySelector(".incoming_id").value;
+const inputField = form.querySelector(".input-field");
+const sendBtn = form.querySelector("button");
+const chatBox = document.querySelector(".chat-box");
 
-form.onsubmit = (e)=>{
-    e.preventDefault(); // Prevent submission
-}
+// Prevent the form from being submitted
+form.onsubmit = (e) => {
+    e.preventDefault();
+};
 
+// Set focus on the input field when the page loads
 inputField.focus();
-inputField.onkeyup = ()=>{
-    if(inputField.value != ""){
+
+// Add the 'active' class to the send button if the input field has a value, otherwise remove the class
+inputField.onkeyup = () => {
+    if (inputField.value != "") {
         sendBtn.classList.add("active");
-    }else{
+    } else {
         sendBtn.classList.remove("active");
     }
-}
+};
 
-sendBtn.onclick = ()=>{
+// Send a message to the server when the send button is clicked
+sendBtn.onclick = () => {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/insert-chat.php", true);
-    xhr.onload = ()=>{
-      if(xhr.readyState === XMLHttpRequest.DONE){
-          if(xhr.status === 200){
-              inputField.value = "";
-              scrollToBottom();
-          }
-      }
-    }
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Clear the input field and scroll to the bottom of the chat box
+                inputField.value = "";
+                scrollToBottom();
+            }
+        }
+    };
     let formData = new FormData(form);
-    xhr.send(formData); // Send form data to php through ajax
-}
-chatBox.onmouseenter = ()=>{
+    xhr.send(formData);
+};
+
+// Add the 'active' class to the chat box when the user's mouse enters it
+chatBox.onmouseenter = () => {
     chatBox.classList.add("active");
-}
+};
 
-chatBox.onmouseleave = ()=>{
+// Remove the 'active' class from the chat box when the user's mouse leaves it
+chatBox.onmouseleave = () => {
     chatBox.classList.remove("active");
-}
+};
 
-setInterval(() =>{
+// Retrieve new messages from the server every 500 milliseconds and update the chat box
+setInterval(() => {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/get-chat.php", true);
-    xhr.onload = ()=>{
-      if(xhr.readyState === XMLHttpRequest.DONE){
-          if(xhr.status === 200){
-            let data = xhr.response;
-            chatBox.innerHTML = data;
-            if(!chatBox.classList.contains("active")){
-                scrollToBottom();
-              }
-          }
-      }
-    }
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Set the chat box's HTML to the response from the server and scroll to the bottom if the chat box is not currently active
+                let data = xhr.response;
+                chatBox.innerHTML = data;
+                if (!chatBox.classList.contains("active")) {
+                    scrollToBottom();
+                }
+            }
+        }
+    };
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("incoming_id="+incoming_id);
+    xhr.send("incoming_id=" + incoming_id);
 }, 500);
 
-function scrollToBottom(){
+// A helper function to scroll the chat box to the bottom
+function scrollToBottom() {
     chatBox.scrollTop = chatBox.scrollHeight;
-  }
-  
+}
