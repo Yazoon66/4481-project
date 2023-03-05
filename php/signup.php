@@ -1,5 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost/");
 session_start(); // Start a new or resume an existing session
 include_once "config.php"; // Include the configuration file that sets up a connection to the database
 
@@ -26,7 +25,8 @@ if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
                 // Get the extension of the user uploaded image.
                 $img_explode = explode(".", $img_name);
                 $img_ext = end($img_explode);
-
+            
+            
                 $extensions = ["png", "jpeg", "jpg"]; // Array of valid image extensions.
                 if (in_array($img_ext, $extensions) === true) {
                     // If the user uploaded image extension matches with valid extensions,
@@ -49,10 +49,16 @@ if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
                                 $row = mysqli_fetch_assoc($sql3);
                                 // Use the user unique ID in other PHP files as well.
                                 $_SESSION["unique_id"] = $row["unique_id"];
+                                $_SESSION["is_guest"] = 0;
+                                echo "Success";
+                            } else {
+                                echo "User insertion failed!";
                             }
                         } else {
-                            echo "Something went wrong!";
+                           echo "Something went wrong!";
                         }
+                    } else {
+                        echo "Error uploading image!";
                     }
                 } else {
                     echo "Please select an image file - jpeg, jpg, png!";

@@ -7,15 +7,14 @@ form.onsubmit = (e) => {
 };
 
 continueBtn.onclick = () => {
-    // Send login information using Ajax
-    let xhr = new XMLHttpRequest(); // create XML object
+    //create XML object and use Ajax
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/signup.php", true);
     xhr.onload = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 let data = xhr.response;
-                console.log(data);
-                if (data == "success") {
+                if (data.includes("Success")) {
                     location.href = "users.php";
                 } else {
                     errorText.textContent = data;

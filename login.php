@@ -30,7 +30,7 @@
         </div>
       </form>
       <div class="link">Not yet signed up? <a href="index.php">Signup now</a></div>
-      <div class="link">Want to join as a Guest?<a href="users.php">Join Chat here</a></div>
+      <div class="link">Want to join as a Guest?<a href="guest.php">Join Chat here</a></div>
     </section>
   </div>
   

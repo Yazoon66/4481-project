@@ -17,6 +17,7 @@ if(!empty($email) && !empty($password)){ // If email and password are not empty
             $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}"); // Update the user's status in the database
             if($sql2){ // If the query was successful
                 $_SESSION['unique_id'] = $row['unique_id']; // Set the unique ID of the user as a session variable
+                $_SESSION["is_guest"] = 0;
                 echo "success"; // Return the success message to the AJAX call
             } else {
                 echo "Something went wrong. Please try again!"; // Return an error message to the AJAX call

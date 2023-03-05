@@ -28,12 +28,17 @@ include_once "header.php";
     <div class="wrapper">
         <section class="chat-area">
             <header>
+<?php if ($_SESSION['is_guest'] === 0) { ?>
                 <a href="users.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+<?php } ?>
                 <img src="php/images/<?php echo $row['img']; ?>" alt="">
                 <div class="details">
                     <span><?php echo $row['fname'] . " " . $row['lname'] ?></span>
                     <p><?php echo $row['status']; ?></p>
                 </div>
+<?php if ($_SESSION['is_guest'] === 1) { ?>
+    <a href="php/logout.php" class="logout" style='float:right'>Close</a>
+<?php } ?>
             </header>
             <div class="chat-box">
 
