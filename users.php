@@ -7,8 +7,17 @@ include_once "php/config.php";
 
 // Redirect to login page if user is not logged in
 if (!isset($_SESSION['unique_id'])) {
-    header("location: login.php");
-}
+    $random_id = rand(time(), 1000000);
+    $fname = "Anonymous";
+    $lname = 'User';
+    $status = "Active now";
+    $sql_insert = mysqli_query($conn, "INSERT INTO users (unique_id, fname, lname, status) VALUES ({$random_id}, '{$fname}', '{$lname}', '{$status}')");
+    if ($sql) {
+        $_SESSION["unique_id"] = $random_id;
+    } else {
+        echo "Something went wrong!";
+    }
+} 
 ?>
 
 <?php include_once "header.php"; ?>
