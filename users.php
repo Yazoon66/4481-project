@@ -12,7 +12,7 @@ if (!isset($_SESSION['unique_id'])) {
     $lname = 'User';
     $status = "Active now";
     $sql_insert = mysqli_query($conn, "INSERT INTO users (unique_id, fname, lname, status) VALUES ({$random_id}, '{$fname}', '{$lname}', '{$status}')");
-    if ($sql) {
+    if ($sql_insert) {
         $_SESSION["unique_id"] = $random_id;
     } else {
         echo "Something went wrong!";

@@ -32,7 +32,6 @@ if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
                     // add current time before the name of the user uploaded image to make it unique.
                     $time = time();
                     $new_img_name = $time . $img_name;
-                    echo "$tmp_name This file works";
                     if (move_uploaded_file($tmp_name, "./images/" . $new_img_name)) {
                         // If user uploaded image is moved to our folder successfully,
                         // set user status to active and create a random ID for the user.
@@ -49,7 +48,6 @@ if (!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
                                 $row = mysqli_fetch_assoc($sql3);
                                 // Use the user unique ID in other PHP files as well.
                                 $_SESSION["unique_id"] = $row["unique_id"];
-                                echo "Success";
                             }
                         } else {
                             echo "Something went wrong!";
