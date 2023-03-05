@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost/");
 session_start(); // Start a new or resume an existing session
 include_once "config.php"; // Include the configuration file that sets up a connection to the database
 
