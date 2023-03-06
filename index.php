@@ -35,6 +35,11 @@
           <input type="password" name="password" placeholder="Enter new password" required>
           <i class="fas fa-eye"></i>
         </div>
+        <div class="field input">
+          <label>Employee ID</label>
+          <input type="text" name="employee_id" placeholder="Enter your employee ID" required>
+          <i class="fas fa-eye"></i>
+        </div>
         <div class="field image">
           <label>Select Image</label>
           <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
