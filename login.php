@@ -29,7 +29,7 @@
           <input type="submit" name="submit" value="Continue to Chat">
         </div>
       </form>
-      <div class="link">Not yet signed up? <a href="index.php">Signup now</a></div>
+      <div class="link">Need to create a help desk login? <a href="index.php">Signup now</a></div>
       <div class="link">Want to join as a Guest?<a href="guest.php">Join Chat here</a></div>
     </section>
   </div>
