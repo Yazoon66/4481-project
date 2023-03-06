@@ -15,6 +15,7 @@ if (
     !empty($password) &&
     !empty($employee_id)
 ) {
+    // Check if employee_id is valid
     $sql0 = mysqli_query(
         $conn,
         "SELECT unique_id FROM users WHERE unique_id = '{$employee_id}'"
