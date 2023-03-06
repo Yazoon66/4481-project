@@ -27,7 +27,19 @@ if ($sql2) {
         $_SESSION["unique_id"] = $row["unique_id"];
         $_SESSION["is_guest"] = 1;
 
-        header("Location: chat.php?user_id=1481230803");
+        $sql4 = mysqli_query($conn, "SELECT unique_id FROM users WHERE is_guest = 0 AND status='Active now'");
+
+        $users = array();
+        while ($row = mysqli_fetch_array($sql4)) {
+            $users[] = $row;
+        }
+
+        $rnd = rand() % count($users);
+
+        $rnduser = $users[$rnd];
+        $unique_id = $rnduser['unique_id'];
+
+        header("Location: chat.php?user_id=$unique_id");
     } else {
         echo "User insertion failed!";
     }
