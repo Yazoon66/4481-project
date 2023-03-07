@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2023 at 05:39 AM
+-- Generation Time: Mar 07, 2023 at 03:04 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `messages` (
-  `msg_id` int(11) NOT NULL,
-  `incoming_msg_id` int(255) NOT NULL,
-  `outgoing_msg_id` int(255) NOT NULL,
+  `msg_id` bigint(15) NOT NULL,
+  `incoming_msg_id` bigint(255) NOT NULL,
+  `outgoing_msg_id` bigint(255) NOT NULL,
   `msg` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -77,7 +77,9 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) V
 (36, 24767761, 519760876, 'http://google.com'),
 (37, 24767761, 519760876, '<a href=\'google.com\'>qqq</a>'),
 (38, 24767761, 1098549307, 'Hello'),
-(39, 1098549307, 24767761, 'Hi how can I help?');
+(39, 1098549307, 24767761, 'Hi how can I help?'),
+(40, 2147483647, 1662466564, 'Test'),
+(41, 648867767074786, 1662466564, 'Test');
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `passwor
 (6, 326272693292916, 'Admin', 'A', 'yazan@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1676635785profile-picture.jpeg', 0, 'Active now'),
 (7, 713081317956071, 'Bailey', 'L', 'bailey@gmail.com', 'a47eace67ec36839ddb9cd868bdc3a33', '1676636292images.jpg', 0, 'Active now'),
 (14, 248697192614588, 'Yazan', 'Armoush', 'yazan99@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1678051818Screen Shot 2023-03-01 at 5.12.44 PM.png', 0, 'Active now'),
-(76, 648867767074786, '', '', '', '', '', 0, ''),
+(76, 648867767074786, 'Chris', 'T', 'chris123@gmail.com', '944facfeb153b4f01916a0f166fcc315', '1678153284Picture.jpg', 0, 'Active now'),
 (77, 901892704140169, '', '', '', '', '', 0, '');
 
 --
@@ -132,13 +134,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `msg_id` bigint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
