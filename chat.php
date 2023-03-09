@@ -38,6 +38,8 @@ include_once "header.php";
                 </div>
 <?php if ($_SESSION['is_guest'] === 1) { ?>
     <a href="php/logout.php" class="logout" style='float:right'>Close</a>
+<?php } else { ?>
+    <a href="transfer.php?user_id=<?php echo $row['unique_id']?>" class="logout" style='float:right'>Transfer</a>
 <?php } ?>
             </header>
             <div class="chat-box">
