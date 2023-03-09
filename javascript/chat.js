@@ -74,14 +74,14 @@ function scrollToBottom() {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-window.onbeforeunload = function(){
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "php/logout.php", true);
-    xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-        }
-    };
-    xhr.send();
+//window.onbeforeunload = function(){
+//    let xhr = new XMLHttpRequest();
+//    xhr.open("POST", "php/logout.php", true);
+//    xhr.onload = () => {
+//        if (xhr.readyState === XMLHttpRequest.DONE) {
+//        }
+//    };
+//    xhr.send();
 
-    return ""; 
-}
+//    return ""; 
+//}
