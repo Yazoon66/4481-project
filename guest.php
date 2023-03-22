@@ -46,5 +46,3 @@ if ($sql2) {
 } else {
     echo "Something went wrong!";
 }
-
-?>

@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 07, 2023 at 03:04 AM
+-- Host: localhost
+-- Generation Time: Mar 09, 2023 at 03:01 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -79,7 +79,11 @@ INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) V
 (38, 24767761, 1098549307, 'Hello'),
 (39, 1098549307, 24767761, 'Hi how can I help?'),
 (40, 2147483647, 1662466564, 'Test'),
-(41, 648867767074786, 1662466564, 'Test');
+(41, 648867767074786, 1662466564, 'Test'),
+(42, 326272693292916, 929236095, 'hi'),
+(43, 929236095, 326272693292916, 'You have been transfered, <a href=\'chat.php?user_id=326272693292916\'>please click here</a>'),
+(44, 713081317956071, 1157820438, 'hi'),
+(45, 1157820438, 713081317956071, 'You have been transfered, <a href=\'chat.php?user_id=326272693292916\'>please click here</a>');
 
 -- --------------------------------------------------------
 
@@ -104,11 +108,24 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `is_guest`, `status`) VALUES
-(6, 326272693292916, 'Admin', 'A', 'yazan@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1676635785profile-picture.jpeg', 0, 'Active now'),
-(7, 713081317956071, 'Bailey', 'L', 'bailey@gmail.com', 'a47eace67ec36839ddb9cd868bdc3a33', '1676636292images.jpg', 0, 'Active now'),
+(6, 326272693292916, 'Admin', 'A', 'yazan@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1676635785profile-picture.jpeg', 0, 'Offline now'),
+(7, 713081317956071, 'Bailey', 'L', 'bailey@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1676636292images.jpg', 0, 'Active now'),
 (14, 248697192614588, 'Yazan', 'Armoush', 'yazan99@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1678051818Screen Shot 2023-03-01 at 5.12.44 PM.png', 0, 'Active now'),
 (76, 648867767074786, 'Chris', 'T', 'chris123@gmail.com', '944facfeb153b4f01916a0f166fcc315', '1678153284Picture.jpg', 0, 'Active now'),
-(77, 901892704140169, '', '', '', '', '', 0, '');
+(77, 901892704140169, 'Yazan', 'Armoush', 'yazan88@live.com', '81dc9bdb52d04dc20036dbd8313ed055', '16783251911678055841Screen Shot 2023-03-01 at 5.04.25 PM.png', 0, 'Offline now'),
+(80, 588425070, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(81, 91764873, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(82, 601609230, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(83, 1532788742, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(84, 1817087, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(85, 894672133, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(86, 1022439113, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(87, 1430481746, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(88, 929236095, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(89, 1434426198, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(90, 1591867034, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(91, 187056138, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now'),
+(92, 1157820438, 'Guest', '', '', '', 'guest.jpg', 1, 'Offline now');
 
 --
 -- Indexes for dumped tables
@@ -134,13 +151,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` bigint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `msg_id` bigint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
