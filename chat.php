@@ -55,8 +55,8 @@ include_once "header.php";
 
             <form action="#" method="POST" enctype="multipart/form-data" class="image-upload-form" autocomplete="off">
                 <input type="text" class="incoming_id" name="incoming_id" value="<?php echo $user_id; ?>" hidden>
-                <input type="file" name="image" class="image-upload" accept="image/x-png,image/gif,image/jpeg,image/jpg">
-                <input type="submit" name="submit" value="Upload Image">
+                <input type="file" name="image" class="image-upload" accept="image/x-png,image/gif,image/jpeg,image/jpg,.pdf">
+                <input type="submit" name="submit" value="Upload File">
             </form>
 
             

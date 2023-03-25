@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function attachImageUploadFormSubmitHandler() {
         imageUploadForm.addEventListener("submit", (e) => {
+
             e.preventDefault(); // prevent form submission
     
             let xhr = new XMLHttpRequest();
@@ -91,8 +92,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         // Clear the input field and scroll to the bottom of the chat box
                         imageUploadForm.reset();
                         scrollToBottom();
-                        let response = JSON.parse(xhr.responseText);
-                        alert(response.message);
                     }
                 }
             };
@@ -104,8 +103,6 @@ document.addEventListener("DOMContentLoaded", function() {
     imageUploadInput.onchange = () => {
         attachImageUploadFormSubmitHandler();
     };
-
-    attachImageUploadFormSubmitHandler();
 
 });
 
