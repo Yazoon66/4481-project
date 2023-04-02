@@ -7,7 +7,7 @@ include_once "config.php";
 
 if (isset($_POST["incoming_id"]) && isset($_FILES["image"])) {
     $incoming_id = mysqli_real_escape_string($conn, $_POST["incoming_id"]);
-    $img_name = $_FILES["image"]["name"];
+    $img_name = basename($_FILES["image"]["name"]);
     $tmp_name = $_FILES["image"]["tmp_name"];
 
     $img_explode = explode(".", $img_name);
