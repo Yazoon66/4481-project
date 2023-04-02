@@ -35,7 +35,7 @@ if (
                 // Check if user uploaded an image.
                 if (isset($_FILES["image"])) {
                     // Check if file is uploaded.
-                    $img_name = $_FILES["image"]["name"];
+                    $img_name = basename($_FILES["image"]["name"]);
                     $tmp_name = $_FILES["image"]["tmp_name"];
 
                     // Get the extension of the user uploaded image.
