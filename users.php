@@ -9,8 +9,6 @@ include_once "php/config.php";
 if (!isset($_SESSION['unique_id']) || $_SESSION["is_guest"] !== 0) {
     header("location: login.php");
 }
-
-
 ?>
 
 <?php include_once "header.php"; ?>
@@ -27,13 +25,14 @@ if (!isset($_SESSION['unique_id']) || $_SESSION["is_guest"] !== 0) {
                         $row = mysqli_fetch_assoc($sql);
                     }
                     ?>
-                    <img src="php/images/<?php echo $row['img']; ?>" alt="">
+                    <img src="php/images/<?php print_r(htmlspecialchars($row['img'], ENT_QUOTES, 'UTF-8')) ?>" alt="">
                     <div class="details">
-                        <span><?php echo $row['fname'] . " " . $row['lname'] ?></span>
-                        <p><?php echo $row['status']; ?></p>
+                        <span><?php print_r(htmlspecialchars($row['fname']. " " . $row['lname'], ENT_QUOTES, 'UTF-8')); ?></span>
+                        <p><?php print_r(htmlspecialchars($row['status'], ENT_QUOTES, 'UTF-8')); ?></p>
                     </div>
                 </div>
-                <a href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>" class="logout">Logout</a>
+                <!-- deleted logout_id at the end to protect sensitive user id -->
+                <a href="php/logout.php" class="logout">Logout</a>
             </header>
             <div class="search">
                 <span class="text">Select a user to start chat</span>
