@@ -2,11 +2,23 @@
 session_start(); // Start a new or resume an existing session
 include_once "config.php"; // Include the configuration file that sets up a connection to the database
 
-$fname = $_POST["fname"];
-$lname = $_POST["lname"];
-$email = $_POST["email"];
-$password =  $_POST["password"];
-$employee_id = $_POST["employee_id"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['nonce']) && $_POST['nonce'] === $_SESSION['nonce']) {
+        if (isset($_POST["email"]) && isset($_POST['password']) && isset($_POST['fname']) && isset($_POST['lname'])&& isset($_POST['employee_id'])) {
+            $fname = $_POST["fname"];
+            $lname = $_POST["lname"];
+            $email = $_POST["email"];
+            $password =  $_POST["password"];
+            $employee_id = $_POST["employee_id"];
+            $encrypt_pass = password_hash($password, PASSWORD_BCRYPT); #custom salt is no longer supported, therefore use bcrypt algorithm
+        }else{
+            header("location: signup.php");
+            exit(); // stop executing code
+        }
+    } else {
+        echo "CSRF Attack!";
+    }
+}
 
 if (
     !empty($fname) &&
@@ -57,12 +69,10 @@ if (
                             // If user uploaded image is moved to our folder successfully,
                             // set user status to active and create a random ID for the user.
                             $status = "Active now";
-                            $encrypt_pass = md5($password);
                             // Insert all user data inside the table.
                             $stmt2 = $conn->prepare("UPDATE users SET fname= ?, lname = ?, email = ?, `password` = ?, img = ?, `status` = ? WHERE `unique_id`=?");
                             $stmt2->bind_param("ssssssi", $fname, $lname, $email, $encrypt_pass, $new_img_name, $status, $employee_id);
                             $result1 = $stmt2->execute();
-                          
                           
                             if ($result1) {
                                 // If data is inserted successfully, fetch user data from the database.
