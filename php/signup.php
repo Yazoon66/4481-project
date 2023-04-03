@@ -2,11 +2,11 @@
 session_start(); // Start a new or resume an existing session
 include_once "config.php"; // Include the configuration file that sets up a connection to the database
 
-$fname = mysqli_real_escape_string($conn, $_POST["fname"]);
-$lname = mysqli_real_escape_string($conn, $_POST["lname"]);
-$email = mysqli_real_escape_string($conn, $_POST["email"]);
-$password = mysqli_real_escape_string($conn, $_POST["password"]);
-$employee_id = mysqli_real_escape_string($conn, $_POST["employee_id"]);
+$fname = $_POST["fname"];
+$lname = $_POST["lname"];
+$email = $_POST["email"];
+$password =  $_POST["password"];
+$employee_id = $_POST["employee_id"];
 
 if (
     !empty($fname) &&
@@ -16,26 +16,26 @@ if (
     !empty($employee_id)
 ) {
     // Check if employee_id is valid
-    $sql0 = mysqli_query(
-        $conn,
-        "SELECT unique_id FROM users WHERE unique_id = '{$employee_id}'"
-    );
-    if (mysqli_num_rows($sql0) > 0) {
+    $stmt0 = $conn->prepare("SELECT unique_id FROM users WHERE unique_id = ?");
+    $stmt0->bind_param("s", $employee_id);
+    $stmt0->execute();
+    $result0 = $stmt0->get_result();
+    if ($result0->num_rows > 0) {
         // Check if email that the user inputted is valid or not.
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             // If email is valid, check if email already exists in the database.
-            $sql = mysqli_query(
-                $conn,
-                "SELECT email FROM users WHERE email = '{$email}'"
-            );
-            if (mysqli_num_rows($sql) > 0) {
+            $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
                 // If email address already exists, inform the user.
                 echo "$email - this email already exists!";
             } else {
                 // Check if user uploaded an image.
                 if (isset($_FILES["image"])) {
                     // Check if file is uploaded.
-                    $img_name = $_FILES["image"]["name"];
+                    $img_name = basename($_FILES["image"]["name"]);
                     $tmp_name = $_FILES["image"]["tmp_name"];
 
                     // Get the extension of the user uploaded image.
@@ -58,27 +58,20 @@ if (
                             // set user status to active and create a random ID for the user.
                             $status = "Active now";
                             $encrypt_pass = md5($password);
-
                             // Insert all user data inside the table.
-                            $sql2 = mysqli_query(
-                                $conn,
-                                "UPDATE `users` SET 
-                                    `fname` = '$fname',  
-                                    `lname` = '$lname', 
-                                    `email` = '$email', 
-                                    `password` = '$encrypt_pass', 
-                                    `img` = '$new_img_name', 
-                                    `status` = '$status'
-                                    WHERE `unique_id`='$employee_id'"
-                            );
-                            if ($sql2) {
+                            $stmt2 = $conn->prepare("UPDATE users SET fname= ?, lname = ?, email = ?, `password` = ?, img = ?, `status` = ? WHERE `unique_id`=?");
+                            $stmt2->bind_param("ssssssi", $fname, $lname, $email, $encrypt_pass, $new_img_name, $status, $employee_id);
+                            $result1 = $stmt2->execute();
+                          
+                          
+                            if ($result1) {
                                 // If data is inserted successfully, fetch user data from the database.
-                                $sql3 = mysqli_query(
-                                    $conn,
-                                    "SELECT * FROM users WHERE email = '{$email}'"
-                                );
-                                if (mysqli_num_rows($sql3) > 0) {
-                                    $row = mysqli_fetch_assoc($sql3);
+                                $stmt3 = $conn->prepare("SELECT * FROM users WHERE email = ?");
+                                $stmt3->bind_param("s", $email);
+                                $stmt3->execute();
+                                $result2 = $stmt3->get_result();
+                                if ($result2->num_rows > 0) {
+                                    $row =  $result2->fetch_assoc();
                                     // Use the user unique ID in other PHP files as well.
                                     $_SESSION["unique_id"] = $row["unique_id"];
                                     $_SESSION["is_guest"] = 0;
