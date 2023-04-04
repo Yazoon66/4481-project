@@ -22,7 +22,7 @@ if (isset($_POST["incoming_id"]) && isset($_FILES["image"])) {
         if (move_uploaded_file($tmp_name, "images/" . $new_img_name)) {
             echo "File moved successfully";
             $from_id = $_SESSION["unique_id"];
-            $message = "<a target='_blank' href='php/images/" . $new_img_name . "'>" . $img_name . "</>";
+            $message = "<a target='_blank' href='php/images/" . $new_img_name . "'>" . $img_name . "</a>";
 
             $message = mysqli_real_escape_string($conn, $message);
 
