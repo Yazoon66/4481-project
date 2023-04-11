@@ -1,7 +1,7 @@
 <?php 
   // Start a new session or resume an existing session
   session_start();
-  
+  $_SESSION['nonce'] = bin2hex(random_bytes(16)); // Generate a new nonce token
   // If the user is already logged in, redirect them to the users.php page
   if(isset($_SESSION['unique_id'])){
     header("location: users.php");
@@ -16,6 +16,7 @@
       <header>EECS 4481-project</header>
       <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
         <div class="error-text"></div>
+        <input type="hidden" name="nonce" value="<?php echo $_SESSION['nonce'] ?>">
         <div class="field input">
           <label>Email Address</label>
           <input type="text" name="email" placeholder="Enter your email" required>
